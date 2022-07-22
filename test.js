@@ -10,7 +10,7 @@ function getMovieTitles() {
                 }).catch(err => {
                     resolve(err.response.data)
                 })
-        }, 1000)
+        }, 40)
 
     })
 

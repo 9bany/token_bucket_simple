@@ -12,12 +12,12 @@ type Rule struct {
 * update in a background job in case some dynamic changed are needed.
 */
 var rulesMap = map[string]Rule{
-	"gen-user": {MaxTokens: 2, Rate: 5},
+	"gen-user": {MaxTokens: 20, Rate: 20},
 }
 
 func GetBucket(indentifier string, userType string) *TokenBucket {
 	if clientBucketMap[indentifier] == nil {
-		clientBucketMap[indentifier] = NewTokenBucket(rulesMap[userType].MaxTokens, rulesMap[userType].Rate)
+		clientBucketMap[indentifier] = NewTokenBucket(rulesMap[userType].Rate, rulesMap[userType].MaxTokens)
 	}
 	return clientBucketMap[indentifier]
 }
