@@ -1,6 +1,7 @@
-package main
+package middleware
 
 import (
+	"9bany/rate-limiter-token-bucket/rule"
 	"crypto/md5"
 	"fmt"
 	"math/big"
@@ -9,7 +10,7 @@ import (
 	"github.com/gin-gonic/gin"
 )
 
-func middleware(ctx *gin.Context) {
+func Middleware(ctx *gin.Context) {
 	var userType string
 	if val, exists := ctx.Get("user-type"); exists {
 		userType = val.(string)
@@ -19,7 +20,7 @@ func middleware(ctx *gin.Context) {
 		userType = "gen-user"
 	}
 
-	tokenBucket := GetBucket(GetClientIndentifire(ctx), userType)
+	tokenBucket := rule.GetBucket(GetClientIndentifire(ctx), userType)
 
 	if !tokenBucket.IsRequesrAllowed(1) {
 		ctx.AbortWithStatusJSON(http.StatusTooManyRequests, gin.H{

@@ -1,4 +1,4 @@
-package main
+package token_bucket
 
 import (
 	"math"
