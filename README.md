@@ -1,5 +1,7 @@
 # Token bucket for gin middleware
 
+## Algorithm work
+
 The token bucket algorithm work as follows:
 
 - A token bucket is a container that has pre-defined capacity. Tokens are put in the bucket at preset rates periodically. Once the bucket is full, no more tokens are added.
@@ -45,3 +47,14 @@ Pros:
 
 Cons:
 - Two parameters in the algorithm are bucket size and token refill rate. However, it might be challenging to tune them properly.
+
+## Run
+
+1. Run server 
+```
+make server
+```
+2. Test 
+```
+make test
+```

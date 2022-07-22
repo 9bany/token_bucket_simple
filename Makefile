@@ -1,3 +1,3 @@
 server:
-	go run .
+	go run main.go
 .PHONY: server
