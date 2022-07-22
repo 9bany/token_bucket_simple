@@ -7,8 +7,8 @@ import (
 )
 
 type TokenBucket struct {
-	rate                int64
-	maxTokens           int64
+	Rate                int64
+	MaxTokens           int64
 	currentTokens       int64
 	lastRefillTimestamp time.Time
 	mutex               sync.Mutex
@@ -20,8 +20,8 @@ type TokenBucket struct {
  */
 func NewTokenBucket(Rate int64, MaxTokens int64) *TokenBucket {
 	return &TokenBucket{
-		rate:                Rate,
-		maxTokens:           MaxTokens,
+		Rate:                Rate,
+		MaxTokens:           MaxTokens,
 		lastRefillTimestamp: time.Now(),
 		currentTokens:       MaxTokens,
 	}
@@ -35,8 +35,8 @@ func (tokenBucket *TokenBucket) refill() {
 	now := time.Now()
 	end := time.Since(tokenBucket.lastRefillTimestamp)
 
-	tokensTobeAdded := (end.Nanoseconds() * tokenBucket.rate) / 1000000000
-	tokenBucket.currentTokens = int64(math.Min(float64(tokenBucket.currentTokens+tokensTobeAdded), float64(tokenBucket.maxTokens)))
+	tokensTobeAdded := (end.Nanoseconds() * tokenBucket.Rate) / 1000000000
+	tokenBucket.currentTokens = int64(math.Min(float64(tokenBucket.currentTokens+tokensTobeAdded), float64(tokenBucket.MaxTokens)))
 
 	tokenBucket.lastRefillTimestamp = now
 }

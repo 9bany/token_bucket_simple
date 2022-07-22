@@ -9,8 +9,8 @@ import (
 func createBucket(t *testing.T, maxTokens int64, rate int64) *TokenBucket {
 	bucket := NewTokenBucket(rate, maxTokens)
 
-	require.Equal(t, int64(rate), bucket.rate)
-	require.Equal(t, int64(maxTokens), bucket.maxTokens)
+	require.Equal(t, int64(rate), bucket.Rate)
+	require.Equal(t, int64(maxTokens), bucket.MaxTokens)
 	return bucket
 }
 
@@ -20,7 +20,7 @@ func TestCreateBucket(t *testing.T) {
 
 func TestIsRequestAllowedTrue(t *testing.T) {
 	bucket := createBucket(t, int64(2), int64(20))
-	maxTokens := bucket.maxTokens
+	maxTokens := bucket.MaxTokens
 	resultAllowed := bucket.IsRequestAllowed(1)
 
 	require.Equal(t, resultAllowed, true)
@@ -29,7 +29,7 @@ func TestIsRequestAllowedTrue(t *testing.T) {
 
 func TestIsRequestAlloweFalse(t *testing.T) {
 	bucket := createBucket(t, int64(2), int64(20))
-	maxTokens := bucket.maxTokens
+	maxTokens := bucket.MaxTokens
 	resultAllowed := bucket.IsRequestAllowed(4)
 
 	require.Equal(t, resultAllowed, false)
