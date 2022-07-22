@@ -1,7 +1,17 @@
 package main
 
-import "log"
+import (
+	"log"
+
+	"github.com/gin-gonic/gin"
+)
 
 func main() {
-	log.Println("Hello world")	
+
+	router := gin.Default()
+	InitRoutes(router)
+	err := router.Run()
+	if err != nil {
+		log.Fatalln(err)
+	}
 }
