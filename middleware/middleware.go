@@ -22,7 +22,7 @@ func Middleware(ctx *gin.Context) {
 
 	tokenBucket := rule.GetBucket(GetClientIndentifire(ctx), userType)
 
-	if !tokenBucket.IsRequesrAllowed(1) {
+	if !tokenBucket.IsRequestAllowed(1) {
 		ctx.AbortWithStatusJSON(http.StatusTooManyRequests, gin.H{
 			"message": "Try again after sometime!",
 		})

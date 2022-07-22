@@ -46,7 +46,7 @@ func (tokenBucket *TokenBucket) refill() {
 * It first refills the clients bucket and after that checks if the client can perform
 * the required request or not.
  */
-func (tokenBucket *TokenBucket) IsRequesrAllowed(token int64) bool {
+func (tokenBucket *TokenBucket) IsRequestAllowed(token int64) bool {
 	tokenBucket.mutex.Lock()
 	defer tokenBucket.mutex.Unlock()
 	tokenBucket.refill()
